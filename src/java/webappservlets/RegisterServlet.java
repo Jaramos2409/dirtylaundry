@@ -53,8 +53,6 @@ public class RegisterServlet extends HttpServlet {
             user.setFirstname(firstname);
             user.setLastname(lastname);
             
-           
-            
             if(user.getEmail().equals("") || user.getPassword().equals(""))
             {
                 url = "/sorryregister.jsp";
@@ -72,7 +70,6 @@ public class RegisterServlet extends HttpServlet {
                 }
             }
         }
-        
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
