@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Welcome</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div><h1>Welcome ${sessionScope.user.email} to Dirty Laundry</h1>
+        </div>
+        <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Personal Information</a>
     </body>
 </html>
