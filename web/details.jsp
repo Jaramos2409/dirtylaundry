@@ -35,6 +35,7 @@
                 <tr>
                     <td><input type="hidden" id="id" name="id" value="${user.id}"/></td>
                     <td><input type="submit" value="Save"/></td>
+                    <td><input type="submit" value="Back"/></td>
                 </tr>
             </table>
         </div>
