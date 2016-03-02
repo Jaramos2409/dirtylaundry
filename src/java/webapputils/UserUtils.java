@@ -87,12 +87,22 @@ public class UserUtils {
                 System.out.println(user.getId());
                 System.out.println("test");
                 
-                stmt = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ? where Id = ?");
+                stmt = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ?, city = ?, birthday = ?, ethnicity = ?, education = ?, occupation = ?, relationship = ?, phone = ?, state = ?, gender = ?, about = ? where Id = ?");
                 stmt.setString(1, user.getEmail());
                 stmt.setString(2, user.getPassword());
                 stmt.setString(3, user.getFirstname());
                 stmt.setString(4, user.getLastname());
-                stmt.setInt(5, user.getId());
+                stmt.setString(5, user.getCity());
+                stmt.setString(6, user.getBirthday());
+                stmt.setString(7, user.getEthnicity());
+                stmt.setString(8, user.getEducation());
+                stmt.setString(9, user.getOccupation());
+                stmt.setString(10, user.getRelationship());
+                stmt.setString(11, user.getPhone());
+                stmt.setString(12, user.getState());
+                stmt.setString(13, user.getGender());
+                stmt.setString(14, user.getAbout());       
+                stmt.setInt(15, user.getId());
                 
                 stmt.executeUpdate();
     
@@ -153,6 +163,16 @@ public class UserUtils {
                         String l = rs.getString("lastname");
                         String pw = rs.getString("password");
                         String em = rs.getString("email");
+                        String c = rs.getString("city");
+                        String bd = rs.getString("birthday");
+                        String eth = rs.getString("ethnicity");
+                        String e = rs.getString("education");
+                        String o = rs.getString("occupation");
+                        String r = rs.getString("relationship");
+                        String p = rs.getString("phone");
+                        String st =rs.getString("state");
+                        String g = rs.getString("gender");
+                        String ab = rs.getString("about");
                         
                         User user = new User();
                         
@@ -161,6 +181,16 @@ public class UserUtils {
                         user.setLastname(l);
                         user.setPassword(pw);
                         user.setEmail(em);
+                        user.setCity(c);
+                        user.setBirthday(bd);
+                        user.setEthnicity(eth);
+                        user.setEducation(e);
+                        user.setOccupation(o);
+                        user.setRelationship(r);
+                        user.setPhone(p);
+                        user.setGender(g);
+                        user.setState(st);
+                        user.setAbout(ab);
                         
                         users.add(user);
                         

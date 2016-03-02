@@ -46,6 +46,16 @@ public class SaveServlet extends HttpServlet {
         mainuser.setLastname(request.getParameter("lastname"));
         mainuser.setPassword(request.getParameter("password"));
         mainuser.setId(Integer.parseInt(request.getParameter("id")));
+        mainuser.setCity(request.getParameter("city"));
+        mainuser.setBirthday(request.getParameter("birthday"));
+        mainuser.setEthnicity(request.getParameter("ethnicity"));
+        mainuser.setEducation(request.getParameter("education"));
+        mainuser.setOccupation(request.getParameter("occupation"));
+        mainuser.setRelationship(request.getParameter("relationship"));
+        mainuser.setPhone(request.getParameter("phone"));
+        mainuser.setGender(request.getParameter("gender"));
+        mainuser.setState(request.getParameter("state"));
+        mainuser.setAbout(request.getParameter("about"));
         
         UserUtils.updateUser(mainuser);
         
