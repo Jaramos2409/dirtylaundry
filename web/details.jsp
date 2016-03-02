@@ -33,7 +33,7 @@
                     <td><input id="password" maxlength="30" name="password" size="30" type="text" value="${user.password}"/> </td>
                 </tr> 
                 <tr>
-                    <td><input type="text" id="id" name="id" value="${user.id}"/></td>
+                    <td><input type="hidden" id="id" name="id" value="${user.id}"/></td>
                     <td><input type="submit" value="Save"/></td>
                 </tr>
             </table>

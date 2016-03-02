@@ -67,7 +67,7 @@ public class UserUtils {
             PreparedStatement stmt = null;
            
              try {
-                String dbURL = "jdbc:mysql://localhost:3306/cs3520";
+                String dbURL = "jdbc:mysql://localhost:3306/cs4310";
                 String username = "root";
                 String password = "password";
                 
@@ -87,7 +87,7 @@ public class UserUtils {
                 System.out.println(user.getId());
                 System.out.println("test");
                 
-                stmt = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ? where id = ?");
+                stmt = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ? where Id = ?");
                 stmt.setString(1, user.getEmail());
                 stmt.setString(2, user.getPassword());
                 stmt.setString(3, user.getFirstname());
