@@ -22,7 +22,7 @@
                 results = (List<User>) request.getAttribute("results");
                 
                 for (User user : results) {
-                   out.println(user.getFirstname() + " " + user.getLastname());%><br>
+                   out.println(user.getFirstname() + " " + user.getLastname() + " " );%><br>
         <%
                 }
             }

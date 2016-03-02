@@ -37,21 +37,32 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        String searchType = request.getParameter("searchType");
-        String keywords = request.getParameter("keywords");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String gender = request.getParameter("gender");
+        String email = request.getParameter("email");
+        String city = request.getParameter("city");
+        String state = request.getParameter("state");
+        String birthday = request.getParameter("birthday");
+        String ethnicity = request.getParameter("ethnicity");
+        String education = request.getParameter("education");
+        String occupation = request.getParameter("occupation");
+        String relationship = request.getParameter("relationship");
+        String phone = request.getParameter("phone");
         String url = "";
         
         List<User> results = new ArrayList<>();
          
         if (null!=action && action.equals("search"))
         {
-            if(keywords.equals(""))
+            if(firstname.equals("") &&  lastname.equals("") && city.equals(""))
             {
                 url = "/sorrysearch.jsp";
             } 
             else
             {
-                results = SearchUtils.getSearchResults(keywords);
+                results = SearchUtils.getSearchResults(firstname, lastname, gender, email, city, state, birthday,
+                        ethnicity, education, occupation, relationship, phone);
                 if (results.isEmpty())
                 {
                     url = "/nosearchresults.jsp";
