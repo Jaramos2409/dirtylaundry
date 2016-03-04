@@ -42,13 +42,18 @@ public class UserUtils {
                 connection = DriverManager.getConnection(
                     dbURL, username, password);
                 
-                System.out.println("Successful Connection");
+                if (connection != null)
+                {
+                    System.out.println("Successful Connection");
+                }
+                
                 stmt = connection.createStatement();
                 String query = "INSERT into User (firstname, lastname, email, password)" +
                         "VALUES ('"+user.getFirstname() + "','" + user.getLastname() + "','" + user.getEmail() + "','" + user.getPassword() + "')";
                 stmt.executeUpdate(query);
                 
             }catch (Exception e){
+                e.printStackTrace();
             }
             finally{
                  try{
@@ -58,7 +63,7 @@ public class UserUtils {
                  catch(Exception e) {
                      e.printStackTrace();}
         return false;
-    }
+        }
     }
     
     public static boolean updateUser(User user) throws SQLException{
