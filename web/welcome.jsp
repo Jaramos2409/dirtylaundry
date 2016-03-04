@@ -1,77 +1,71 @@
 <%-- 
-    Document   : welcome
-    Created on : Feb 23, 2016, 7:24:24 PM
+    Document   : home
+    Created on : Mar 3, 2016, 5:01:25 PM
     Author     : nk5946
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome</title>
-    </head>
-    <body>
-        <div><h1>Welcome ${sessionScope.user.email} to Dirty Laundry</h1>
-        </div>
-        <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Personal Information</a>
-        
-        <div><h2>Personal Information</h2>
-            <table>
+
+<head>
+<jsp:include page="header.jsp"/>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+
+</head>
+
+
+<body>
+
+
+<div id="name">
+${sessionScope.user.firstname} ${sessionScope.user.lastname}
+</div>
+
+<div id="bio">
+	<div id="bio-title">About Me!</div>
+	${sessionScope.user.about} 
+</div>
+
+
+<div id="info-reviews">
+	<div id="info">
+		<div id="info-title">Personal Info!</div>
+		Lives in: ${sessionScope.user.city}, ${sessionScope.user.state}<br>
+		Hometown: ${sessionScope.user.city} <br>
+		Sex: ${sessionScope.user.gender} <br>
+		Birth Date: ${sessionScope.user.birthday} <br> 
+		Ethnicity: ${sessionScope.user.ethnicity} <br>
+		Education: ${sessionScope.user.education} <br>
+		Job History: ${sessionScope.user.occupation} <br>
+		Email: ${sessionScope.user.email} <br>
+		Phone: ${sessionScope.user.phone} <br>
+		Relationship: ${sessionScope.user.relationship} <br>
                 
-                <tr>
-                    <td><label for="firstname"><b>First Name</b></label></td>
-                    <td>${sessionScope.user.firstname}</td>
-                </tr>  
-                <tr>
-                    <td><label for="lastname"><b>Last Name</b></label></td>
-                    <td>${sessionScope.user.lastname} </td>
-                </tr>
-                <tr>
-                    <td><label for="email"><b>Email</b></label></td>
-                    <td>${sessionScope.user.email}</td>
-                </tr>  
-                <tr>
-                    <td><label for="city"><b>City</b></label></td>
-                    <td>${sessionScope.user.city}</td>
-                </tr>
-                <tr>
-                    <td><label for="birthday"><b>Birthday</b></label></td>
-                    <td>${sessionScope.user.birthday}</td>
-                </tr>
-                <tr>
-                    <td><label for="ethnicity"><b>Ethnicity</b></label></td>
-                    <td>${sessionScope.user.ethnicity}</td>
-                </tr>
-                <tr>
-                    <td><label for="education"><b>Education</b></label></td>
-                    <td>${sessionScope.user.education}</td>
-                </tr>
-                <tr>
-                    <td><label for="occupation"><b>Occupation</b></label></td>
-                    <td>${sessionScope.user.occupation}</td>
-                </tr>
-                <tr>
-                    <td><label for="relationship"><b>Relationship Status</b></label></td>
-                    <td>${sessionScope.user.relationship}</td>
-                </tr>
-                <tr>
-                    <td><label for="phone"><b>Phone Number</b></label></td>
-                    <td>${sessionScope.user.phone}</td>
-                </tr>
-                <tr>
-                    <td><label for="state"><b>State</b></label></td>
-                    <td>${sessionScope.user.state}</td>
-                </tr>
-                <tr>
-                    <td><label for="gender"><b>Gender</b></label></td>
-                    <td>${sessionScope.user.gender}</td>
-                </tr>
-                <tr>
-                    <td><label for="about"><b>About</b></label></td>
-                    <td>${sessionScope.user.about}</td>
-                </tr>
-            </table>
-        </div>
-    </body>
+                <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Personal Information</a>
+	</div>
+	
+	<div id="reviews">
+		<div id="title-and-button">
+			<div id="review-title">Reviews!</div>
+			<a id="review-button" href="">Write Review</a>
+			<div class="clear"></div>
+		</div>
+
+
+		<div class="review">
+		RATING: ${review.rating}/5
+		<div class="review-inner">this is a review</div>
+		</div>
+		
+		<!-- for reviews in review list -->
+		<!-- <div class="review"> score: ${review.score} /5 -->
+		<!-- <div class="review-inner"> ${review.message} </div></div> -->
+	</div>
+</div>
+
+
+</body>
+
 </html>
