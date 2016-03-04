@@ -9,7 +9,7 @@
 <html>
     <nav>
         <a class="left" href="">Home</a>
-        <a class="left" href="">Search</a>
+        <a class="left" href="SearchServlet?&action=load">Search</a>
         <a class="left" href="">Friends</a>
         <a class="left" href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Profile</a>
         <a class="right" href="LogoutServlet?&action=Logout">Logout</a>

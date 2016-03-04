@@ -52,8 +52,13 @@ public class SearchServlet extends HttpServlet {
         String url = "";
         
         List<User> results = new ArrayList<>();
-         
-        if (null!=action && action.equals("search"))
+        
+        
+        if (null != action && action.equals("load"))
+        {
+            url = "/search.jsp";
+        }
+        else if (null!=action && action.equals("search"))
         {
             if(firstname.equals("") &&  lastname.equals("") && city.equals(""))
             {
