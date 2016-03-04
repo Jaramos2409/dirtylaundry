@@ -12,7 +12,7 @@
         <a class="left" href="">Search</a>
         <a class="left" href="">Friends</a>
         <a class="left" href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Profile</a>
-        <a class="right" href="">Logout</a>
+        <a class="right" href="LogoutServlet?&action=Logout">Logout</a>
         <a class="right" href="">Report</a>
         <a class="right" href="FAQ.html">FAQ</a>
         <div class="clear"></div>
