@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import webappbeans.User;
+import webapputils.ConnectUtils;
 
 
 /**
@@ -40,19 +41,31 @@ public class ConnectServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         
         String action = request.getParameter("action");
-        int modelid = parseInt(request.getParameter("modelId"));
+        int requestorid = user.getId();
+        int requestedid = parseInt(request.getParameter("requestedid"));
+        int id;
         String url ="";
-        int m = MapUtils.getModelByUser(user.getId());
-        int u = MapUtils.getUserByModel(modelid);
+        
+        if(null != action && action.equals("connect"))
+        {
+            ConnectUtils.Connect(requestorid, requestedid);
+        }
+        
+        else if (null != action && action.equals("accept"))
+        {
+            
+    //        ConnectUtils.acceptRequest(id);
+        }
+        // int u = MapUtils.getUserByModel(modelid);
         if(null !=action && action.equals("reserve"))
         {
-            if(m == 0 && u == 0)
+           // if(m == 0 && u == 0)
             {
                 
-                MapUtils.reserveCar(modelid, user.getId());
+               // MapUtils.reserveCar(modelid, user.getId());
                 url = "/thankyoureserve.jsp";
             }
-            else
+           // else
             {
                 url = "/sorryreserve.jsp";
             }
@@ -60,18 +73,18 @@ public class ConnectServlet extends HttpServlet {
         
         else if (null!=action && action.equals("return"))
         {
-            if(user.getId() == u)
+            //if(user.getId() == u)
             {
-                MapUtils.returnCar(user.getId(), modelid); 
+               // MapUtils.returnCar(user.getId(), modelid); 
                 url = "/thankyoureturn.jsp";
             }
-            else if(user.getId() != u)
+           // else if(user.getId() != u)
             {
                 url = "/sorryreturn.jsp";
             }
         }
         
-        System.out.println(u);
+       // System.out.println(u);
         System.out.println(url);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -91,7 +104,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+          //  Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -109,7 +122,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
