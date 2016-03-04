@@ -73,5 +73,9 @@
                 </tr>
             </table>
         </div>
+                <br><br>
+        <form action="${pageContext.request.contextPath}/LogoutServlet" method="post">
+            <input type="submit" value="Logout" />
+        </form>
     </body>
 </html>
