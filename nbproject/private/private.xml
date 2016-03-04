@@ -3,18 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webappbeans/User.java</file>
-            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webapputils/UserUtils.java</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/register.jsp</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webappservlets/RegisterServlet.java</file>
-            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webappservlets/SearchServlet.java</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/searchresult.jsp</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/sorrysearch.jsp</file>
-            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webapputils/SearchUtils.java</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/nosearchresults.jsp</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/sorryregister.jsp</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webappbeans/User.java</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webapputils/UserUtils.java</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webappservlets/SearchServlet.java</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/src/java/webapputils/SearchUtils.java</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/search.jsp</file>
             <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/thankyouregister.jsp</file>
-            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/sorryregister.jsp</file>
+            <file>file:/C:/Users/EVA%20Unit%2002/Documents/NetBeansProjects/DirtyLaundry/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>
