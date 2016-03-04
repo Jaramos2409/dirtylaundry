@@ -12,28 +12,28 @@ package webappbeans;
 import java.io.Serializable;
 public class Review implements Serializable {
     
-    private int ownerid;
-    private int reviewed_id;
+    private int sourceid;
+    private int target_id;
     private int review_count;
     private int reviewer_count;
     private int reviewee_count;
     private int disagree_count;
     private int agree_count;
 
-    public int getOwnerid() {
-        return ownerid;
+    public int getSourceid() {
+        return sourceid;
     }
 
-    public void setOwnerid(int ownerid) {
-        this.ownerid = ownerid;
+    public void setSourceid(int sourceid) {
+        this.sourceid = sourceid;
     }
 
-    public int getReviewed_id() {
-        return reviewed_id;
+    public int getTarget_id() {
+        return target_id;
     }
 
-    public void setReviewed_id(int reviewed_id) {
-        this.reviewed_id = reviewed_id;
+    public void setTarget_id(int target_id) {
+        this.target_id = target_id;
     }
 
     public int getReview_count() {
@@ -75,6 +75,6 @@ public class Review implements Serializable {
     public void setAgree_count(int agree_count) {
         this.agree_count = agree_count;
     }
-    
+
     
 }
