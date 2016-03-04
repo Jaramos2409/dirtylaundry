@@ -8,8 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="header.jsp"/>
-        <link rel="stylesheet" type="text/css" href="style/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Personal Information</title>
     </head>
@@ -77,7 +75,7 @@
             <table>
                 <tr>
                     <h2>About Me</h2>
-                    <input id="about" name="about" type ="text" value="${user.about}"  maxlength="1000" size="500"/>
+                    <textarea id="about" name="about" maxlength="1000" cols="80" rows="5"></textarea>
                 <input type="submit" name="action" value="Save"><input type="submit" name="action" value="Back"
             </table>
         </div>
