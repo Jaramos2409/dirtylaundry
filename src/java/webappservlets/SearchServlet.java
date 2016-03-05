@@ -60,7 +60,18 @@ public class SearchServlet extends HttpServlet {
         }
         else if (null!=action && action.equals("search"))
         {
-            if(firstname.equals("") &&  lastname.equals("") && city.equals(""))
+            if(firstname.isEmpty() 
+                    && lastname.isEmpty() 
+                    && gender.isEmpty()
+                    && email.isEmpty()
+                    && city.isEmpty()
+                    && state.isEmpty()
+                    && birthday.isEmpty()
+                    && ethnicity.isEmpty()
+                    && education.isEmpty()
+                    && occupation.isEmpty()
+                    && relationship.isEmpty()
+                    && phone.isEmpty())
             {
                 url = "/sorrysearch.jsp";
             } 
