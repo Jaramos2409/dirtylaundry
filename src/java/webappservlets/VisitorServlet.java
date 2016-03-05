@@ -7,7 +7,6 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import webappbeans.User;
-import webapputils.SearchUtils;
+import webapputils.UserUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "VisitorServlet", urlPatterns = {"/VisitorServlet"})
+public class VisitorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,36 +36,19 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
+        String id = request.getParameter("id");
         String url = "";
         
-        List<User> results = new ArrayList<>();
+        List<User> userBuf = UserUtils.getVisitee(id);
         
-        
-        if (null != action && action.equals("load"))
+        if (userBuf.size() == 1)
         {
-            url = "/search.jsp";
+            request.setAttribute("visitee", userBuf.get(0));
+            url = "/visitor.jsp";
         }
-        else if (null !=action && action.equals("search"))
+        else
         {
-            if(keyword.isEmpty() || searchType.isEmpty())
-            {
-                url = "/sorrysearch.jsp";
-            } 
-            else
-            {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
-            }
+            url = "/sorryvisitor.jsp";
         }
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);

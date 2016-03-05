@@ -7,22 +7,16 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.User;
-import webapputils.SearchUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,41 +29,6 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
-        String url = "";
-        
-        List<User> results = new ArrayList<>();
-        
-        
-        if (null != action && action.equals("load"))
-        {
-            url = "/search.jsp";
-        }
-        else if (null !=action && action.equals("search"))
-        {
-            if(keyword.isEmpty() || searchType.isEmpty())
-            {
-                url = "/sorrysearch.jsp";
-            } 
-            else
-            {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
-            }
-        }
-        
-        this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,7 +43,8 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
     /**
@@ -98,7 +58,8 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
     /**
