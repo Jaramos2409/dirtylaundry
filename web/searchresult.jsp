@@ -20,7 +20,7 @@
         <c:if test="${not empty results}">
             <c:forEach items="${results}" var="usr">
             <div>
-                ${usr.firstname} ${usr.lastname} <br>
+                <a href="VisitorServlet?action=vistor&id=${usr.id}">${usr.firstname} ${usr.lastname}</a> <br>
                 ${usr.gender} <br>
                 ${usr.city}, ${usr.state}<br>
                 ${usr.relationship}<br><br>

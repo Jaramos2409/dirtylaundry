@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
         {
             url = "/search.jsp";
         }
-        else if (null!=action && action.equals("search"))
+        else if (null !=action && action.equals("search"))
         {
             if(keyword.isEmpty() || searchType.isEmpty())
             {
@@ -63,12 +63,12 @@ public class SearchServlet extends HttpServlet {
                 }
                 else
                 {
+                    request.setAttribute("results", results);
                     url = "/searchresult.jsp";
                 }
             }
         }
         
-        request.setAttribute("results", results);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
