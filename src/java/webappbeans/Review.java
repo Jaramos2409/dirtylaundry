@@ -12,54 +12,50 @@ package webappbeans;
 import java.io.Serializable;
 public class Review implements Serializable {
     
-    private int sourceid;
-    private int target_id;
-    private int review_count;
-    private int reviewer_count;
-    private int reviewee_count;
+    private int id;
+    private int reviewer_id;
+    private int reviewee_id;
+    private String reviewtext; 
     private int disagree_count;
     private int agree_count;
 
-    public int getSourceid() {
-        return sourceid;
+    public Review() {
+    }
+    
+    public int getId() {
+        return id;
     }
 
-    public void setSourceid(int sourceid) {
-        this.sourceid = sourceid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getTarget_id() {
-        return target_id;
+    public int getReviewer_id() {
+        return reviewer_id;
     }
 
-    public void setTarget_id(int target_id) {
-        this.target_id = target_id;
+    public void setReviewer_id(int reviewer_id) {
+        this.reviewer_id = reviewer_id;
     }
 
-    public int getReview_count() {
-        return review_count;
+    public int getReviewee_id() {
+        return reviewee_id;
     }
 
-    public void setReview_count(int review_count) {
-        this.review_count = review_count;
+    public void setReviewee_id(int reviewee_id) {
+        this.reviewee_id = reviewee_id;
     }
 
-    public int getReviewer_count() {
-        return reviewer_count;
+    public String getReviewtext() {
+        return reviewtext;
     }
 
-    public void setReviewer_count(int reviewer_count) {
-        this.reviewer_count = reviewer_count;
+    public void setReviewtext(String reviewtext) {
+        this.reviewtext = reviewtext;
     }
 
-    public int getReviewee_count() {
-        return reviewee_count;
-    }
-
-    public void setReviewee_count(int reviewee_count) {
-        this.reviewee_count = reviewee_count;
-    }
-
+    
+    
     public int getDisagree_count() {
         return disagree_count;
     }
