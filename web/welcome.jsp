@@ -55,7 +55,9 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
                     <div class="clear"></div>
             </div>
              
-            <c:if test="${empty sessionScope.user.reviews.reviews}"> blank </c:if>
+            <c:if test="${empty visitee.reviews.reviews}"> 
+                        No Reviews Available :(. Ask someone to review you! 
+                    </c:if>
             <c:if test="${not empty sessionScope.user.reviews.reviews}">
                 <c:forEach items="${sessionScope.user.reviews.reviews}" var="review">
                     <div class="review">

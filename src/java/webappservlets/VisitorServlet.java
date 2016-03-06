@@ -7,13 +7,18 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Reviewslist;
 import webappbeans.User;
+import webapputils.ReviewUtils;
 import webapputils.UserUtils;
 
 /**
@@ -33,7 +38,7 @@ public class VisitorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         
         String action = request.getParameter("action");
         String id = request.getParameter("id");
@@ -43,7 +48,10 @@ public class VisitorServlet extends HttpServlet {
         
         if (userBuf.size() == 1)
         {
-            request.setAttribute("visitee", userBuf.get(0));
+            User visitee = userBuf.get(0);
+            Reviewslist reviews = ReviewUtils.retrieveReviewList(visitee.getId());
+            visitee.setReviews(reviews);
+            request.setAttribute("visitee", visitee);
             url = "/visitor.jsp";
         }
         else
@@ -66,7 +74,11 @@ public class VisitorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,7 +92,11 @@ public class VisitorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
