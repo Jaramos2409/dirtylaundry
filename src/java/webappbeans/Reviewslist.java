@@ -7,6 +7,7 @@ package webappbeans;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

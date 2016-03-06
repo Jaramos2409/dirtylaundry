@@ -5,9 +5,17 @@
  */
 package webapputils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import webappbeans.Review;
+import webappbeans.Reviewslist;
 
 /**
  *
@@ -31,12 +39,77 @@ public class ReviewUtils {
         return true;
     }
     
-    public static List<Review> retrieveReviewList(int id)
+    public static Reviewslist retrieveReviewList(int id) throws SQLException
     {
-        List<Review> reviews = new ArrayList();
+        Reviewslist reviews = new Reviewslist();
+        reviews.setOwnerid(id);
         
+        List<Review> listOfReviews = new ArrayList();
         
-        
+        Connection connection = null;
+        PreparedStatement pst_revdb = null;  
+        ResultSet rs_revdb = null;  
+
+        String dbURL = "jdbc:mysql://localhost:3306/cs4310";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "root";
+        String password = "password";
+
+        try {
+           try {
+               Class.forName(driver);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(AuthUtils.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           connection = DriverManager.getConnection(
+               dbURL, username, password);
+           if (connection != null)
+           {
+               System.out.println("Successful Connection");
+           }
+           
+           String query = "SELECT r.*, u.firstname, u.lastname " +
+                            "FROM reviews r " +
+                            "    INNER JOIN user u ON r.reviewerid=u.id " +
+                            "WHERE revieweeid = ? " +
+                            "ORDER BY r.agreecount DESC";
+           
+           pst_revdb = connection.prepareStatement(query);
+           
+           pst_revdb.setInt(1, id);
+           
+           rs_revdb = pst_revdb.executeQuery();
+
+           while(rs_revdb.next()) 
+           {
+               Review review = new Review();
+               
+               review.setId(rs_revdb.getInt("id"));
+               review.setReviewer_id(rs_revdb.getInt("reviewerid"));
+               review.setReviewee_id(rs_revdb.getInt("revieweeid"));
+               review.setAgree_count(rs_revdb.getInt("agreecount"));
+               review.setDisagree_count(rs_revdb.getInt("disagreecount"));
+               review.setReviewtext(rs_revdb.getString("reviewtext"));
+               review.setReviewer_name(rs_revdb.getString("firstname") + " " + rs_revdb.getString("lastname"));
+               
+               listOfReviews.add(review);
+           }
+           
+           reviews.setReviews(listOfReviews);
+        }catch (Exception e){
+       e.printStackTrace();
+       }
+       finally{
+            try{
+                rs_revdb.close();
+                pst_revdb.close();
+                connection.close();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
         return reviews;
     }
 }

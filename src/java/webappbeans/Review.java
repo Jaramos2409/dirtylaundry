@@ -14,10 +14,12 @@ public class Review implements Serializable {
     
     private int id;
     private int reviewer_id;
+    private String reviewer_name;
     private int reviewee_id;
     private String reviewtext; 
     private int disagree_count;
     private int agree_count;
+    
 
     public Review() {
     }
@@ -53,7 +55,6 @@ public class Review implements Serializable {
     public void setReviewtext(String reviewtext) {
         this.reviewtext = reviewtext;
     }
-
     
     
     public int getDisagree_count() {
@@ -72,5 +73,11 @@ public class Review implements Serializable {
         this.agree_count = agree_count;
     }
 
-    
+    public String getReviewer_name() {
+        return reviewer_name;
+    }
+
+    public void setReviewer_name(String reviewer_name) {
+        this.reviewer_name = reviewer_name;
+        }
 }

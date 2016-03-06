@@ -196,6 +196,7 @@ public class SearchUtils {
 
                searchResults.add(result);
            }
+           
 
        }catch (Exception e){
            e.printStackTrace();
