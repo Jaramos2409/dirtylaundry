@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         
         String url ="";
-     
+
         User user = UserUtils.validateUser(email, password);
         Reviewslist reviews = ReviewUtils.retrieveReviewList(user.getId());
         user.setReviews(reviews);
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("login_error", "Invalid Login for email " + email + " Please retry Credentials");
         }
         
-         this.getServletContext().getRequestDispatcher(url).forward(request, response);
+        this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

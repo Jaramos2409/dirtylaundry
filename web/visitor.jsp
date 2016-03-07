@@ -25,7 +25,6 @@
                 ${visitee.about} 
         </div>
 
-
         <div id="info-reviews">
                 <div id="info">
                         <div id="info-title">Personal Info!</div>
@@ -43,11 +42,12 @@
 
                 <div id="reviews">
                     <div id="title-and-button">
-                            <div id="review-title">Reviews!</div>
-                            <a id="review-button" href="">Write Review</a>
+                        <div id="review-title">Reviews!</div>
+                            <a id="review-button" href="PostReviewServlet?&action=load&userid=${sessionScope.user.id}&visiteeid=${visitee.id}">
+                                Write Review
+                            </a>
                             <div class="clear"></div>
                     </div>
-
 
                     <c:if test="${empty visitee.reviews.reviews}"> 
                         No Reviews Available :(. Be the first to review this person! 
@@ -60,8 +60,8 @@
                                 Agree: ${review.agree_count}<br>
                                 Disagree: ${review.disagree_count}<br>
                             </div>
-                </c:forEach>
-            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
         </div>
     </body>

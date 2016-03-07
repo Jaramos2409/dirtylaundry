@@ -20,6 +20,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>webappservlets.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostReviewServlet</servlet-name>
+        <servlet-class>webappservlets.PostReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostReviewServlet</servlet-name>
+        <url-pattern>/PostReviewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
