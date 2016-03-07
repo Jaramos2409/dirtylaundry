@@ -52,7 +52,6 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
         <div id="reviews">
             <div id="title-and-button">
                     <div id="review-title">Reviews!</div>
-                    <a id="review-button" href="">Write Review</a>
                     <div class="clear"></div>
             </div>
              

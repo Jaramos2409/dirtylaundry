@@ -12,7 +12,7 @@
         <jsp:include page="header.jsp"/>
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>New Review: </title>
+        <title>Edit Review: </title>
     </head>
     <body>
         <form action="EditReviewServlet?&action=edit&review=${review}" method="post" style="width: 412px">

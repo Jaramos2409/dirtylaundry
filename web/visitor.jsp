@@ -55,10 +55,14 @@
                     <c:if test="${not empty visitee.reviews.reviews}">
                         <c:forEach items="${visitee.reviews.reviews}" var="review">
                             <div class="review">
-                                ${review.reviewer_name}'s Review:
+                               <a href="VisitorServlet?&action=visitor&id=${review.reviewer_id}">
+                                 ${review.reviewer_name}</a>'s Review of <a href="VisitorServlet?&action=visitor&id=${visitee.id}">
+                                 ${visitee.firstname} ${visitee.lastname}</a>:
                                 <div class="review-inner">${review.reviewtext}</div>
-                                Agree: ${review.agree_count}<br>
-                                Disagree: ${review.disagree_count}<br>
+                                ${review.agree_count} people agree with this review.<br>
+                                ${review.disagree_count} people disagree with this review.<br>
+                                What about you? <a href="AgreeServlet?&action=agree&reviewid=${review.id}&revieweeid=${review.reviewee_id}">Agree</a> 
+                                or <a href="DisagreeServlet?&action=disagree&reviewid=${review.id}&revieweeid=${review.reviewee_id}">Disagree</a><br>
                             </div>
                         </c:forEach>
                     </c:if>

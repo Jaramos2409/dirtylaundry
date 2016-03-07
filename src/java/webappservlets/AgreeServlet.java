@@ -11,14 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.Review;
 import webapputils.ReviewUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-public class EditReviewServlet extends HttpServlet {
+public class AgreeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,34 +31,24 @@ public class EditReviewServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        String reviewid = request.getParameter("reviewid");
+        String revieweeid = request.getParameter("revieweeid");
         String url = "";
         
-        if (null != action && action.equals("load"))
+        if (null != action && action.equals("agree"))
         {
-            url = "/editreview.jsp";
-            
-            Review review = ReviewUtils.retrieveSingleReview(Integer.parseInt(request.getParameter("reviewid")));
-            
-            request.getSession().setAttribute("review", review);
-            request.setAttribute("review", review);
-        }
-        else if (null != action && action.equals("edit"))
-        {
-            Review review =  (Review) request.getSession().getAttribute("review");
-            request.getSession().removeAttribute("review");
-            
-            review.setAgree_count(0);
-            review.setDisagree_count(0);
-            review.setReviewtext(request.getParameter("reviewtext"));
-            
-            if (ReviewUtils.update(review))
+            if(ReviewUtils.incrementAgree(Integer.parseInt(reviewid)))
             {
-                url = "/ViewReviewsServlet?action=load";
+                url = "/VisitorServlet?&action=vistor&id=" + revieweeid;
             }
             else
             {
-                url = "/sorryedit.jsp";
+                url = "/sorryjudgment.jsp";
             }
+        }
+        else
+        {
+            url = "/sorryjudgement.jsp";
         }
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
