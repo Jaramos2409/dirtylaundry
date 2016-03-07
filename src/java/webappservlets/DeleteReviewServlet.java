@@ -7,26 +7,17 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.Reviewslist;
-import webappbeans.User;
 import webapputils.ReviewUtils;
-import webapputils.UserUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "VisitorServlet", urlPatterns = {"/VisitorServlet"})
-public class VisitorServlet extends HttpServlet {
+public class DeleteReviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,27 +29,26 @@ public class VisitorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        
+            throws ServletException, IOException {
         String action = request.getParameter("action");
-        String id = request.getParameter("id");
+        String reviewid = request.getParameter("reviewid");
         String url = "";
         
-        List<User> userBuf = UserUtils.getVisitee(id);
-        
-        if (userBuf.size() == 1)
+        if (null != action && !action.equals("delete"))
         {
-            User visitee = userBuf.get(0);
-            Reviewslist reviews = ReviewUtils.reviewsOfYou(visitee.getId());
-            visitee.setReviews(reviews);
-            request.setAttribute("visitee", visitee);
-            url = "/visitor.jsp";
+            url = "/sorrydelete.jsp";
         }
-        else
+        else 
         {
-            url = "/sorryvisitor.jsp";
+            if (ReviewUtils.delete(Integer.parseInt(reviewid)))
+            {
+                url = "/ViewReviewsServlet?action=load";
+            }
+            else
+            {
+                url = "/sorrydelete.jsp";
+            }
         }
-        
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -74,11 +64,7 @@ public class VisitorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -92,11 +78,7 @@ public class VisitorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

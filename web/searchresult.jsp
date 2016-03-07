@@ -25,7 +25,7 @@
                 ${usr.city}, ${usr.state}<br>
                 ${usr.relationship}<br><br>
             </div>
-            </c:forEach> 
+            </c:forEach>
         </c:if> 
         <br><a href="SearchServlet?&action=load">Back to Search Page</a>
     </body>

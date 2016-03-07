@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Review;
+import webappbeans.User;
+import webapputils.ReviewUtils;
 
 /**
  *
@@ -32,19 +35,32 @@ public class PostReviewServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String action = request.getParameter("action");
-        String userid = request.getParameter("userid");
         String visiteeid = request.getParameter("visiteeid");
         String url = "";
         
         if (null != action && action.equals("load"))
         {
             url = "/newreview.jsp";
-            request.setAttribute("userid", userid);
-            request.setAttribute("visitee", visiteeid);
+            request.setAttribute("visiteeid", visiteeid);
         }
-        else
+        else if (null != action && action.equals("addreview"))
         {
+            User user = (User) request.getSession().getAttribute("user");
+            Review newreview = new Review();
             
+            newreview.setId(0);
+            newreview.setReviewer_id(user.getId());
+            newreview.setReviewee_id(Integer.parseInt(visiteeid));
+            newreview.setReviewtext(request.getParameter("reviewtext"));   
+            
+            if (ReviewUtils.insert(newreview))
+            {
+                url = "/VisitorServlet?&action=visitor&id=" + visiteeid;
+            }
+            else
+            {
+                url ="/sorrynewreview.jsp";
+            }
         }
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);      

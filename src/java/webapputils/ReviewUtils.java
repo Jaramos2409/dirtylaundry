@@ -23,10 +23,61 @@ import webappbeans.Reviewslist;
  */
 public class ReviewUtils {
     
-    public static boolean insert(Review review)
+    public static boolean insert(Review newReview)
     {
+        boolean fail_check = true;
         
-        return true;
+        Connection connection = null;
+        PreparedStatement pst_revdb = null;  
+        ResultSet rs_revdb = null;  
+
+        String dbURL = "jdbc:mysql://localhost:3306/cs4310";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "root";
+        String password = "password";
+
+        try {
+           try {
+               Class.forName(driver);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(AuthUtils.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           connection = DriverManager.getConnection(
+               dbURL, username, password);
+           if (connection != null)
+           {
+               System.out.println("Successful Connection");
+           }
+           
+            String query = "INSERT INTO reviews (reviewerid, revieweeid, agreecount, disagreecount, reviewtext) "
+                    + "VALUES(?,?,?,?,?)";
+           
+            pst_revdb = connection.prepareStatement(query);
+
+            pst_revdb.setInt(1, newReview.getReviewer_id());
+            pst_revdb.setInt(2, newReview.getReviewee_id());
+            pst_revdb.setInt(3, 0);
+            pst_revdb.setInt(4, 0);
+            pst_revdb.setString(5, newReview.getReviewtext());
+
+            pst_revdb.executeUpdate();
+         }catch (Exception e){
+        e.printStackTrace();
+        fail_check = false;
+        }
+        finally{
+             try{
+                 rs_revdb.close();
+                 pst_revdb.close();
+                 connection.close();
+             }
+             catch(Exception e) {
+                 e.printStackTrace();
+             }
+         }
+           
+        return fail_check;
     }
     
     public static boolean update(int reviewid)
@@ -36,10 +87,78 @@ public class ReviewUtils {
     
     public static boolean delete(int reviewid)
     {
-        return true;
+        boolean fail_check = true;
+        
+        Connection connection = null;
+        PreparedStatement pst_revdb = null;  
+        ResultSet rs_revdb = null;  
+
+        String dbURL = "jdbc:mysql://localhost:3306/cs4310";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "root";
+        String password = "password";
+
+        try {
+           try {
+               Class.forName(driver);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(AuthUtils.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           connection = DriverManager.getConnection(
+               dbURL, username, password);
+           if (connection != null)
+           {
+               System.out.println("Successful Connection");
+           }
+           
+            String query = "DELETE FROM reviews WHERE id = ?";
+           
+            pst_revdb = connection.prepareStatement(query);
+
+            pst_revdb.setInt(1, reviewid);
+
+            pst_revdb.executeUpdate();
+         }catch (Exception e){
+        e.printStackTrace();
+        fail_check = false;
+        }
+        finally{
+             try{
+                 rs_revdb.close();
+                 pst_revdb.close();
+                 connection.close();
+             }
+             catch(Exception e) {
+                 e.printStackTrace();
+             }
+         }
+           
+        return fail_check;
     }
     
-    public static Reviewslist retrieveReviewList(int id) throws SQLException
+    public static Reviewslist reviewsOfYou(int id) throws SQLException
+    {
+        String query = "SELECT r.*, u.firstname, u.lastname " +
+                            "FROM reviews r " +
+                            "    INNER JOIN user u ON r.reviewerid=u.id " +
+                            "WHERE revieweeid = ? " +
+                            "ORDER BY r.agreecount DESC";
+        
+        return retrieveReviewList(id, query);
+    }
+    
+    public static Reviewslist reviewsByYou(int id) throws SQLException
+    {
+        String query = "SELECT r.*, u.firstname, u.lastname " +
+                            "FROM reviews r " +
+                            "    INNER JOIN user u ON r.revieweeid=u.id " +
+                            "WHERE reviewerid = ? " +
+                            "ORDER BY r.agreecount DESC";
+        return retrieveReviewList(id, query);
+    }
+    
+    public static Reviewslist retrieveReviewList(int id, String query) throws SQLException
     {
         Reviewslist reviews = new Reviewslist();
         reviews.setOwnerid(id);
@@ -68,12 +187,6 @@ public class ReviewUtils {
            {
                System.out.println("Successful Connection");
            }
-           
-           String query = "SELECT r.*, u.firstname, u.lastname " +
-                            "FROM reviews r " +
-                            "    INNER JOIN user u ON r.reviewerid=u.id " +
-                            "WHERE revieweeid = ? " +
-                            "ORDER BY r.agreecount DESC";
            
            pst_revdb = connection.prepareStatement(query);
            

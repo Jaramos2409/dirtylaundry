@@ -56,13 +56,14 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
                     <div class="clear"></div>
             </div>
              
-            <c:if test="${empty visitee.reviews.reviews}"> 
+            <c:if test="${empty sessionScope.user.reviews.reviews}"> 
                         No Reviews Available :(. Ask someone to review you! 
                     </c:if>
             <c:if test="${not empty sessionScope.user.reviews.reviews}">
                 <c:forEach items="${sessionScope.user.reviews.reviews}" var="review">
                     <div class="review">
-                        ${review.reviewer_name}'s Review:
+                        <a href="VisitorServlet?&action=visitor&id=${review.reviewer_id}">
+                                 ${review.reviewer_name}</a>'s Review of You:
                         <div class="review-inner">${review.reviewtext}</div>
                         Agree: ${review.agree_count}<br>
                         Disagree: ${review.disagree_count}<br>

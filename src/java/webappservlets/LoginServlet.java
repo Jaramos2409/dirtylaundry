@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
         String url ="";
 
         User user = UserUtils.validateUser(email, password);
-        Reviewslist reviews = ReviewUtils.retrieveReviewList(user.getId());
+        Reviewslist reviews = ReviewUtils.reviewsOfYou(user.getId());
         user.setReviews(reviews);
         
         if(null != user){

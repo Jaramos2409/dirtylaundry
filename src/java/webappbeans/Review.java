@@ -56,7 +56,6 @@ public class Review implements Serializable {
         this.reviewtext = reviewtext;
     }
     
-    
     public int getDisagree_count() {
         return disagree_count;
     }

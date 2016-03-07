@@ -8,25 +8,21 @@ package webappservlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import webappbeans.Reviewslist;
 import webappbeans.User;
 import webapputils.ReviewUtils;
-import webapputils.UserUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "VisitorServlet", urlPatterns = {"/VisitorServlet"})
-public class VisitorServlet extends HttpServlet {
+public class ViewReviewsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,24 +35,19 @@ public class VisitorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        
         String action = request.getParameter("action");
-        String id = request.getParameter("id");
         String url = "";
         
-        List<User> userBuf = UserUtils.getVisitee(id);
-        
-        if (userBuf.size() == 1)
+        if (null != action && action.equals("load"))
         {
-            User visitee = userBuf.get(0);
-            Reviewslist reviews = ReviewUtils.reviewsOfYou(visitee.getId());
-            visitee.setReviews(reviews);
-            request.setAttribute("visitee", visitee);
-            url = "/visitor.jsp";
+            User user = (User)request.getSession().getAttribute("user");
+            Reviewslist reviewsByYou = ReviewUtils.reviewsByYou(user.getId());
+            request.setAttribute("reviewsByYou", reviewsByYou);
+            url = "/reviews.jsp";
         }
         else
         {
-            url = "/sorryvisitor.jsp";
+            url = "/sorryreviews.jsp";
         }
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -77,7 +68,7 @@ public class VisitorServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +86,7 @@ public class VisitorServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

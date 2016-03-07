@@ -24,6 +24,14 @@
         <servlet-name>PostReviewServlet</servlet-name>
         <servlet-class>webappservlets.PostReviewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewReviewsServlet</servlet-name>
+        <servlet-class>webappservlets.ViewReviewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteReviewServlet</servlet-name>
+        <servlet-class>webappservlets.DeleteReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>PostReviewServlet</servlet-name>
         <url-pattern>/PostReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReviewsServlet</servlet-name>
+        <url-pattern>/ViewReviewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReviewServlet</servlet-name>
+        <url-pattern>/DeleteReviewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

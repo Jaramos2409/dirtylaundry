@@ -43,7 +43,7 @@
                 <div id="reviews">
                     <div id="title-and-button">
                         <div id="review-title">Reviews!</div>
-                            <a id="review-button" href="PostReviewServlet?&action=load&userid=${sessionScope.user.id}&visiteeid=${visitee.id}">
+                            <a id="review-button" href="PostReviewServlet?&action=load&visiteeid=${visitee.id}">
                                 Write Review
                             </a>
                             <div class="clear"></div>

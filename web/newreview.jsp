@@ -14,11 +14,11 @@
         <title>New Review: </title>
     </head>
     <body>
-        <form method="post" style="width: 412px">
+        <form action="PostReviewServlet?&action=addreview&visiteeid=${visiteeid}" method="post" style="width: 412px">
             <label id="review">Review:</label><br>
             <textarea name="reviewtext" style="width: 410px; height: 134px" maxlength="500"></textarea>
             <div align="right">500 character limit</div>
-            <input name="Submit" type="submit" value="submit" align="right" />
+            <input name="Submit" type="submit" value="Add New Review" align="right"/>
         </form>
     </body>
 </html>
