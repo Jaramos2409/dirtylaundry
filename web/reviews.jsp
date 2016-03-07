@@ -32,7 +32,8 @@
                             Disagree: ${review.disagree_count}<br>
                             <a id="review-button" href="DeleteReviewServlet?&action=delete&reviewid=${review.id}">
                                 Delete Review</a>
-                            <a id="review-button" href="">Edit Review</a>
+                            <a id="review-button" href="EditReviewServlet?&action=load&reviewid=${review.id}">
+                                Edit Review</a>
                         </div>
                     </c:forEach>
                 </c:if>

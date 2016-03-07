@@ -32,6 +32,10 @@
         <servlet-name>DeleteReviewServlet</servlet-name>
         <servlet-class>webappservlets.DeleteReviewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditReviewServlet</servlet-name>
+        <servlet-class>webappservlets.EditReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>DeleteReviewServlet</servlet-name>
         <url-pattern>/DeleteReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditReviewServlet</servlet-name>
+        <url-pattern>/EditReviewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

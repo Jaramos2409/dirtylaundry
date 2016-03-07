@@ -80,9 +80,63 @@ public class ReviewUtils {
         return fail_check;
     }
     
-    public static boolean update(int reviewid)
+    public static boolean update(Review newReview)
     {
-        return true;
+        boolean fail_check = true;
+        
+        Connection connection = null;
+        PreparedStatement pst_revdb = null;  
+        ResultSet rs_revdb = null;  
+
+        String dbURL = "jdbc:mysql://localhost:3306/cs4310";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "root";
+        String password = "password";
+
+        try {
+           try {
+               Class.forName(driver);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(AuthUtils.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           connection = DriverManager.getConnection(
+               dbURL, username, password);
+           if (connection != null)
+           {
+               System.out.println("Successful Connection");
+           }
+           
+            String query = "UPDATE reviews "
+                    + "SET reviewerid = ?, revieweeid = ?, agreecount = ?, disagreecount = ?, reviewtext = ? "
+                    + "WHERE id = ?";
+           
+            pst_revdb = connection.prepareStatement(query);
+
+            pst_revdb.setInt(1, newReview.getReviewer_id());
+            pst_revdb.setInt(2, newReview.getReviewee_id());
+            pst_revdb.setInt(3, 0);
+            pst_revdb.setInt(4, 0);
+            pst_revdb.setString(5, newReview.getReviewtext());
+            pst_revdb.setInt(6, newReview.getId());   
+
+            pst_revdb.executeUpdate();
+         }catch (Exception e){
+        e.printStackTrace();
+        fail_check = false;
+        }
+        finally{
+             try{
+                 rs_revdb.close();
+                 pst_revdb.close();
+                 connection.close();
+             }
+             catch(Exception e) {
+                 e.printStackTrace();
+             }
+         }
+           
+        return fail_check;
     }
     
     public static boolean delete(int reviewid)
@@ -135,6 +189,68 @@ public class ReviewUtils {
          }
            
         return fail_check;
+    }
+    
+    public static Review retrieveSingleReview(int id) 
+    {
+        Review review = new Review();
+        
+        Connection connection = null;
+        PreparedStatement pst_revdb = null;  
+        ResultSet rs_revdb = null;  
+
+        String dbURL = "jdbc:mysql://localhost:3306/cs4310";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "root";
+        String password = "password";
+
+        try {
+           try {
+               Class.forName(driver);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(AuthUtils.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           connection = DriverManager.getConnection(
+               dbURL, username, password);
+           if (connection != null)
+           {
+               System.out.println("Successful Connection");
+           }
+           
+            String query = "SELECT * FROM reviews WHERE id = ?";
+
+            pst_revdb = connection.prepareStatement(query);
+
+            pst_revdb.setInt(1, id);
+
+            rs_revdb = pst_revdb.executeQuery();
+
+            while(rs_revdb.next()) 
+            {
+                review.setId(rs_revdb.getInt("id"));
+                review.setReviewer_id(rs_revdb.getInt("reviewerid"));
+                review.setReviewee_id(rs_revdb.getInt("revieweeid"));
+                review.setAgree_count(rs_revdb.getInt("agreecount"));
+                review.setDisagree_count(rs_revdb.getInt("disagreecount"));
+                review.setReviewtext(rs_revdb.getString("reviewtext"));
+            }
+
+         }catch (Exception e){
+        e.printStackTrace();
+        }
+        finally{
+             try{
+                 rs_revdb.close();
+                 pst_revdb.close();
+                 connection.close();
+             }
+             catch(Exception e) {
+                 e.printStackTrace();
+             }
+         }
+        
+        return review;
     }
     
     public static Reviewslist reviewsOfYou(int id) throws SQLException
