@@ -37,18 +37,8 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String city = request.getParameter("city");
-        String state = request.getParameter("state");
-        String birthday = request.getParameter("birthday");
-        String ethnicity = request.getParameter("ethnicity");
-        String education = request.getParameter("education");
-        String occupation = request.getParameter("occupation");
-        String relationship = request.getParameter("relationship");
-        String phone = request.getParameter("phone");
+        String keyword = request.getParameter("keyword");
+        String searchType = request.getParameter("searchtype");
         String url = "";
         
         List<User> results = new ArrayList<>();
@@ -58,28 +48,27 @@ public class SearchServlet extends HttpServlet {
         {
             url = "/search.jsp";
         }
-        else if (null!=action && action.equals("search"))
+        else if (null !=action && action.equals("search"))
         {
-            if(firstname.equals("") &&  lastname.equals("") && city.equals(""))
+            if(keyword.isEmpty() || searchType.isEmpty())
             {
                 url = "/sorrysearch.jsp";
             } 
             else
             {
-                results = SearchUtils.getSearchResults(firstname, lastname, gender, email, city, state, birthday,
-                        ethnicity, education, occupation, relationship, phone);
+                results = SearchUtils.getSearchResults(keyword, searchType);
                 if (results.isEmpty())
                 {
                     url = "/nosearchresults.jsp";
                 }
                 else
                 {
+                    request.setAttribute("results", results);
                     url = "/searchresult.jsp";
                 }
             }
         }
         
-        request.setAttribute("results", results);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 

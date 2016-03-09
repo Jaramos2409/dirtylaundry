@@ -23,8 +23,8 @@ import webapputils.ConnectUtils;
  *
  * @author nk5946
  */
-@WebServlet(name = "ConnectServlet", urlPatterns = {"/ConnectServlet"})
-public class ConnectServlet extends HttpServlet {
+@WebServlet(name = "AcceptServlet", urlPatterns = {"/AcceptServlet"})
+public class AcceptServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,14 +42,14 @@ public class ConnectServlet extends HttpServlet {
         
         String action = request.getParameter("action");
         int userid = user.getId();
-        int requestedid = parseInt(request.getParameter("requestedid"));
+        int requestorid = parseInt(request.getParameter("requestorid"));
         
         String url ="";
         
-        if(null != action && action.equals("connect"))
+        if(null != action && action.equals("Accept"))
         {
-            ConnectUtils.Connect(userid, requestedid);
-            url="/visitor.jsp";
+            ConnectUtils.acceptRequest(requestorid, userid);
+            url="/friends.jsp";
         }
         
        // System.out.println(u);

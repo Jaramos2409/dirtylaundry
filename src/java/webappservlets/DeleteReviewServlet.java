@@ -6,25 +6,18 @@
 package webappservlets;
 
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.User;
-import webapputils.ConnectUtils;
-
+import webapputils.ReviewUtils;
 
 /**
  *
- * @author nk5946
+ * @author EVA Unit 02
  */
-@WebServlet(name = "ConnectServlet", urlPatterns = {"/ConnectServlet"})
-public class ConnectServlet extends HttpServlet {
+public class DeleteReviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +27,28 @@ public class ConnectServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        User user = (User) request.getSession().getAttribute("user");
-        
+            throws ServletException, IOException {
         String action = request.getParameter("action");
-        int userid = user.getId();
-        int requestedid = parseInt(request.getParameter("requestedid"));
+        String reviewid = request.getParameter("reviewid");
+        String url = "";
         
-        String url ="";
-        
-        if(null != action && action.equals("connect"))
+        if (null != action && !action.equals("delete"))
         {
-            ConnectUtils.Connect(userid, requestedid);
-            url="/visitor.jsp";
+            url = "/sorrydelete.jsp";
         }
-        
-       // System.out.println(u);
-        System.out.println(url);
+        else 
+        {
+            if (ReviewUtils.delete(Integer.parseInt(reviewid)))
+            {
+                url = "/ViewReviewsServlet?action=load";
+            }
+            else
+            {
+                url = "/sorrydelete.jsp";
+            }
+        }
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -69,11 +64,7 @@ public class ConnectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-          //  Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -87,11 +78,7 @@ public class ConnectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-//            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

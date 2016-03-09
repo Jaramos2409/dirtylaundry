@@ -6,25 +6,23 @@
 package webappservlets;
 
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Reviewslist;
 import webappbeans.User;
-import webapputils.ConnectUtils;
-
+import webapputils.ReviewUtils;
 
 /**
  *
- * @author nk5946
+ * @author EVA Unit 02
  */
-@WebServlet(name = "ConnectServlet", urlPatterns = {"/ConnectServlet"})
-public class ConnectServlet extends HttpServlet {
+public class ViewReviewsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +32,24 @@ public class ConnectServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        User user = (User) request.getSession().getAttribute("user");
-        
         String action = request.getParameter("action");
-        int userid = user.getId();
-        int requestedid = parseInt(request.getParameter("requestedid"));
+        String url = "";
         
-        String url ="";
-        
-        if(null != action && action.equals("connect"))
+        if (null != action && action.equals("load"))
         {
-            ConnectUtils.Connect(userid, requestedid);
-            url="/visitor.jsp";
+            User user = (User)request.getSession().getAttribute("user");
+            Reviewslist reviewsByYou = ReviewUtils.reviewsByYou(user.getId());
+            request.setAttribute("reviewsByYou", reviewsByYou);
+            url = "/reviews.jsp";
+        }
+        else
+        {
+            url = "/sorryreviews.jsp";
         }
         
-       // System.out.println(u);
-        System.out.println(url);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -72,7 +68,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-          //  Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +86,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-//            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

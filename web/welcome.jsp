@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html>
@@ -43,28 +44,36 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
 		Phone: ${sessionScope.user.phone} <br>
 		Relationship: ${sessionScope.user.relationship} <br>
                 
-                <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">Edit Personal Information</a>
+                <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">
+                    Edit Personal Information
+                </a>
 	</div>
-	
-	<div id="reviews">
-		<div id="title-and-button">
-			<div id="review-title">Reviews!</div>
-			<a id="review-button" href="">Write Review</a>
-			<div class="clear"></div>
-		</div>
+        
+        <div id="reviews">
+            <div id="title-and-button">
+                    <div id="review-title">Reviews!</div>
+                    <div class="clear"></div>
+            </div>
+             
+            <c:if test="${empty sessionScope.user.reviews.reviews}"> 
+                        No Reviews Available :(. Ask someone to review you! 
+                    </c:if>
+            <c:if test="${not empty sessionScope.user.reviews.reviews}">
+                <c:forEach items="${sessionScope.user.reviews.reviews}" var="review">
+                    <div class="review">
+                        <a href="VisitorServlet?&action=visitor&id=${review.reviewer_id}">
+                                 ${review.reviewer_name}</a>'s Review of You:
+                        <div class="review-inner">${review.reviewtext}</div>
+                        Agree: ${review.agree_count}<br>
+                        Disagree: ${review.disagree_count}<br>
+                    </div>
+                </c:forEach>
+            </c:if>
+        </div>
 
-
-		<div class="review">
-		RATING: ${review.rating}/5
-		<div class="review-inner">this is a review</div>
-		</div>
-		
-		<!-- for reviews in review list -->
-		<!-- <div class="review"> score: ${review.score} /5 -->
-		<!-- <div class="review-inner"> ${review.message} </div></div> -->
-	</div>
 </div>
 
+                    <br><br><br>
 
 </body>
 

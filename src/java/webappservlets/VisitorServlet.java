@@ -6,8 +6,9 @@
 package webappservlets;
 
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -15,16 +16,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Reviewslist;
 import webappbeans.User;
-import webapputils.ConnectUtils;
-
+import webapputils.ReviewUtils;
+import webapputils.UserUtils;
 
 /**
  *
- * @author nk5946
+ * @author EVA Unit 02
  */
-@WebServlet(name = "ConnectServlet", urlPatterns = {"/ConnectServlet"})
-public class ConnectServlet extends HttpServlet {
+@WebServlet(name = "VisitorServlet", urlPatterns = {"/VisitorServlet"})
+public class VisitorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +36,29 @@ public class ConnectServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        User user = (User) request.getSession().getAttribute("user");
         
         String action = request.getParameter("action");
-        int userid = user.getId();
-        int requestedid = parseInt(request.getParameter("requestedid"));
+        String id = request.getParameter("id");
+        String url = "";
         
-        String url ="";
+        List<User> userBuf = UserUtils.getVisitee(id);
         
-        if(null != action && action.equals("connect"))
+        if (userBuf.size() == 1)
         {
-            ConnectUtils.Connect(userid, requestedid);
-            url="/visitor.jsp";
+            User visitee = userBuf.get(0);
+            Reviewslist reviews = ReviewUtils.reviewsOfYou(visitee.getId());
+            visitee.setReviews(reviews);
+            request.setAttribute("visitee", visitee);
+            url = "/visitor.jsp";
+        }
+        else
+        {
+            url = "/sorryvisitor.jsp";
         }
         
-       // System.out.println(u);
-        System.out.println(url);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -72,7 +77,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-          //  Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +95,7 @@ public class ConnectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-//            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VisitorServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

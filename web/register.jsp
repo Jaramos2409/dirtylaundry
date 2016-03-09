@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="header.jsp"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register</title>
     </head>

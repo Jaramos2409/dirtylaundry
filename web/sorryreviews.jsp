@@ -1,6 +1,6 @@
 <%-- 
-    Document   : nosearchresults
-    Created on : Feb 26, 2016, 11:19:19 AM
+    Document   : sorryreviews
+    Created on : Mar 6, 2016, 9:32:48 PM
     Author     : EVA Unit 02
 --%>
 
@@ -9,12 +9,11 @@
 <html>
     <head>
         <jsp:include page="header.jsp"/>
+        <link rel="stylesheet" type="text/css" href="style/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Results</title>
+        <title>Whoops!</title>
     </head>
     <body>
-        <h1>Sorry, there was no results to your search.  Please try again.</h1>
-        
-        <a href="search.jsp">Back</a>
+        <h1>There was an error loading your reviews page!</h1>
     </body>
 </html>

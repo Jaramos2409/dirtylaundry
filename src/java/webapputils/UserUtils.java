@@ -66,6 +66,11 @@ public class UserUtils {
         }
     }
     
+     public static List<User>getVisitee(String ID)
+    {
+        return doQuery("SELECT * FROM user WHERE id = '" + ID + "'");
+    }
+    
     public static boolean updateUser(User user) throws SQLException{
          Connection connection = null;
             int count = 0;
@@ -216,4 +221,3 @@ public class UserUtils {
         }
 }
 }
-

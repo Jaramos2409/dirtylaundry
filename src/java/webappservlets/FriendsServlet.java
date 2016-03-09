@@ -8,6 +8,7 @@ package webappservlets;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,8 +24,8 @@ import webapputils.ConnectUtils;
  *
  * @author nk5946
  */
-@WebServlet(name = "ConnectServlet", urlPatterns = {"/ConnectServlet"})
-public class ConnectServlet extends HttpServlet {
+@WebServlet(name = "FriendsServlet", urlPatterns = {"/FriendsServlet"})
+public class FriendsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +39,15 @@ public class ConnectServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        User user = (User) request.getSession().getAttribute("user");
-        
-        String action = request.getParameter("action");
-        int userid = user.getId();
-        int requestedid = parseInt(request.getParameter("requestedid"));
+        int id = parseInt(request.getParameter("userid"));
         
         String url ="";
         
-        if(null != action && action.equals("connect"))
-        {
-            ConnectUtils.Connect(userid, requestedid);
-            url="/visitor.jsp";
-        }
+        List<User> users = ConnectUtils.getFriends(id);
+        List<User> requests = ConnectUtils.getFriendsRequests(id);
+        request.setAttribute("users", users);
+        request.setAttribute("requests", requests);
+        url="/friends.jsp";
         
        // System.out.println(u);
         System.out.println(url);
