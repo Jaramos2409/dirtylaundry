@@ -27,6 +27,15 @@ public class User implements Serializable {
     private String state;
     private String gender;
     private String about;
+    private Reviewslist reviews;
+
+    public Reviewslist getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Reviewslist reviews) {
+        this.reviews = reviews;
+    }
 
     public String getCity() {
         return city;

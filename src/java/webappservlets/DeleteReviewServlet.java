@@ -7,22 +7,17 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.User;
-import webapputils.SearchUtils;
+import webapputils.ReviewUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+public class DeleteReviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,40 +30,25 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
+        String reviewid = request.getParameter("reviewid");
         String url = "";
         
-        List<User> results = new ArrayList<>();
-        
-        
-        if (null != action && action.equals("load"))
+        if (null != action && !action.equals("delete"))
         {
-            url = "/search.jsp";
+            url = "/sorrydelete.jsp";
         }
-        else if (null !=action && action.equals("search"))
+        else 
         {
-            if(keyword.isEmpty() || searchType.isEmpty())
+            if (ReviewUtils.delete(Integer.parseInt(reviewid)))
             {
-                url = "/sorrysearch.jsp";
-            } 
+                url = "/ViewReviewsServlet?action=load";
+            }
             else
             {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
+                url = "/sorrydelete.jsp";
             }
         }
-        
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 

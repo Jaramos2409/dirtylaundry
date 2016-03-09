@@ -20,6 +20,30 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>webappservlets.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostReviewServlet</servlet-name>
+        <servlet-class>webappservlets.PostReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReviewsServlet</servlet-name>
+        <servlet-class>webappservlets.ViewReviewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteReviewServlet</servlet-name>
+        <servlet-class>webappservlets.DeleteReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditReviewServlet</servlet-name>
+        <servlet-class>webappservlets.EditReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AgreeServlet</servlet-name>
+        <servlet-class>webappservlets.AgreeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisagreeServlet</servlet-name>
+        <servlet-class>webappservlets.DisagreeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
@@ -39,6 +63,30 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostReviewServlet</servlet-name>
+        <url-pattern>/PostReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReviewsServlet</servlet-name>
+        <url-pattern>/ViewReviewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReviewServlet</servlet-name>
+        <url-pattern>/DeleteReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditReviewServlet</servlet-name>
+        <url-pattern>/EditReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgreeServlet</servlet-name>
+        <url-pattern>/AgreeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisagreeServlet</servlet-name>
+        <url-pattern>/DisagreeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,22 +7,19 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Review;
 import webappbeans.User;
-import webapputils.SearchUtils;
+import webapputils.ReviewUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+public class PostReviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,41 +32,38 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
+        String visiteeid = request.getParameter("visiteeid");
         String url = "";
-        
-        List<User> results = new ArrayList<>();
-        
         
         if (null != action && action.equals("load"))
         {
-            url = "/search.jsp";
+            url = "/newreview.jsp";
+            request.setAttribute("visiteeid", visiteeid);
         }
-        else if (null !=action && action.equals("search"))
+        else if (null != action && action.equals("addreview"))
         {
-            if(keyword.isEmpty() || searchType.isEmpty())
+            User user = (User) request.getSession().getAttribute("user");
+            Review newreview = new Review();
+            
+            newreview.setId(0);
+            newreview.setReviewer_id(user.getId());
+            newreview.setReviewee_id(Integer.parseInt(visiteeid));
+            newreview.setReviewtext(request.getParameter("reviewtext"));   
+            
+            if (ReviewUtils.insert(newreview))
             {
-                url = "/sorrysearch.jsp";
-            } 
+                url = "/VisitorServlet?&action=visitor&id=" + visiteeid;
+            }
             else
             {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
+                url ="/sorrynewreview.jsp";
             }
         }
         
-        this.getServletContext().getRequestDispatcher(url).forward(request, response);
+        this.getServletContext().getRequestDispatcher(url).forward(request, response);      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

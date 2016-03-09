@@ -7,22 +7,22 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webappbeans.Reviewslist;
 import webappbeans.User;
-import webapputils.SearchUtils;
+import webapputils.ReviewUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+public class ViewReviewsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +34,20 @@ public class SearchServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException, SQLException {
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
         String url = "";
-        
-        List<User> results = new ArrayList<>();
-        
         
         if (null != action && action.equals("load"))
         {
-            url = "/search.jsp";
+            User user = (User)request.getSession().getAttribute("user");
+            Reviewslist reviewsByYou = ReviewUtils.reviewsByYou(user.getId());
+            request.setAttribute("reviewsByYou", reviewsByYou);
+            url = "/reviews.jsp";
         }
-        else if (null !=action && action.equals("search"))
+        else
         {
-            if(keyword.isEmpty() || searchType.isEmpty())
-            {
-                url = "/sorrysearch.jsp";
-            } 
-            else
-            {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
-            }
+            url = "/sorryreviews.jsp";
         }
         
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -84,7 +65,11 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -98,7 +83,11 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewReviewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

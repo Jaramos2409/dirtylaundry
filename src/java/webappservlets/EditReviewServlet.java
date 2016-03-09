@@ -7,22 +7,18 @@ package webappservlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webappbeans.User;
-import webapputils.SearchUtils;
+import webappbeans.Review;
+import webapputils.ReviewUtils;
 
 /**
  *
  * @author EVA Unit 02
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+public class EditReviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,37 +31,34 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchtype");
         String url = "";
-        
-        List<User> results = new ArrayList<>();
-        
         
         if (null != action && action.equals("load"))
         {
-            url = "/search.jsp";
+            url = "/editreview.jsp";
+            
+            Review review = ReviewUtils.retrieveSingleReview(Integer.parseInt(request.getParameter("reviewid")));
+            
+            request.getSession().setAttribute("review", review);
+            request.setAttribute("review", review);
         }
-        else if (null !=action && action.equals("search"))
+        else if (null != action && action.equals("edit"))
         {
-            if(keyword.isEmpty() || searchType.isEmpty())
+            Review review =  (Review) request.getSession().getAttribute("review");
+            request.getSession().removeAttribute("review");
+            
+            review.setAgree_count(0);
+            review.setDisagree_count(0);
+            review.setReviewtext(request.getParameter("reviewtext"));
+            
+            if (ReviewUtils.update(review))
             {
-                url = "/sorrysearch.jsp";
-            } 
+                url = "/ViewReviewsServlet?action=load";
+            }
             else
             {
-                results = SearchUtils.getSearchResults(keyword, searchType);
-                if (results.isEmpty())
-                {
-                    url = "/nosearchresults.jsp";
-                }
-                else
-                {
-                    request.setAttribute("results", results);
-                    url = "/searchresult.jsp";
-                }
+                url = "/sorryedit.jsp";
             }
         }
         

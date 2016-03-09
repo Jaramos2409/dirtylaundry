@@ -128,6 +128,11 @@ public class UserUtils {
     {
         return doQuery("select * from user");
     }
+    
+    public static List<User>getVisitee(String ID)
+    {
+        return doQuery("SELECT * FROM user WHERE id = '" + ID + "'");
+    }
 
     public static User validateUser(String email, String password)
     {

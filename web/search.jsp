@@ -8,37 +8,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="header.jsp"/>
+        <link rel="stylesheet" type="text/css" href="style/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search</title>
     </head>
-    <body>
+    <body>    
     <form action="SearchServlet?action=search" method="post">
-            <label for="firstname">First Name: </label>
-            <input name="firstname" style="width: 186px" type="text" /><br>
-            <label for="lastname">Last Name: </label>
-            <input name="lastname" style="width: 186px" type="text" /><br>
-            <label for="gender">Gender: </label>
-            <input name="gender" style="width: 186px" type="text" /><br>
-            <label for="email">Email: </label>
-            <input name="email" style="width: 186px" type="text" /><br>
-            <label for="city">City: </label>
-            <input name="city" style="width: 186px" type="text" /><br>
-            <label for="state">State: </label>
-            <input name="state" style="width: 186px" type="text" /><br>
-			<label for="birthday">Birthday: </label>
-            <input name="birthday" style="width: 186px" type="text" /><br>
-            <label for="ethnicity">Ethnicity: </label>
-            <input name="ethnicity" style="width: 186px" type="text" /><br>
-            <label for="education">Education: </label>
-            <input name="education" style="width: 186px" type="text" /><br>
-            <label for="occupation">Occupation: </label>
-            <input name="occupation" style="width: 186px" type="text" /><br>
-            <label for="relationship">Relationship: </label>
-            <input name="relationship" style="width: 186px" type="text" /><br>
-            <label for="phone">Phone: </label>
-            <input name="phone" style="width: 186px" type="text" /><br>
-            <br>
-    <input name="submit" type="submit" value="search" />
+	<input name="keyword" style="width: 352px" type="text" /><select name="searchtype" style="width: 113px">
+	<option>Name</option>
+	<option>Email</option>
+	<option>City, State</option>
+	<option>Relationship</option>
+	<option>Phone Number</option>
+	</select>
+        <input name="submit" type="submit" value="search" />
     </form>
+    
     </body>
 </html>
