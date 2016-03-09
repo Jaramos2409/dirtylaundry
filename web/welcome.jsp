@@ -32,6 +32,9 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
 
 <div id="info-reviews">
 	<div id="info">
+            <a id="review-button" href="UploadProfilePicServlet?&action=load">
+                                Upload Profile Picture
+                            </a>
 		<div id="info-title">Personal Info!</div>
 		Lives in: ${sessionScope.user.city}, ${sessionScope.user.state}<br>
 		Hometown: ${sessionScope.user.city} <br>
@@ -57,7 +60,7 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
              
             <c:if test="${empty sessionScope.user.reviews.reviews}"> 
                         No Reviews Available :(. Ask someone to review you! 
-                    </c:if>
+            </c:if>
             <c:if test="${not empty sessionScope.user.reviews.reviews}">
                 <c:forEach items="${sessionScope.user.reviews.reviews}" var="review">
                     <div class="review">

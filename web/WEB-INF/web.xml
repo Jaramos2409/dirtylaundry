@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param> 
+        <description>Location to store uploaded file</description> 
+            <param-name>file-upload</param-name> 
+            <param-value>
+                C:\Users\EVA Unit 02\Documents\NetBeansProjects\DirtyLaundry\web\data
+             </param-value> 
+    </context-param>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>webappservlets.SearchServlet</servlet-class>
@@ -44,6 +51,10 @@
         <servlet-name>DisagreeServlet</servlet-name>
         <servlet-class>webappservlets.DisagreeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadProfilePicServlet</servlet-name>
+        <servlet-class>webappservlets.UploadProfilePicServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
@@ -87,6 +98,10 @@
     <servlet-mapping>
         <servlet-name>DisagreeServlet</servlet-name>
         <url-pattern>/DisagreeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadProfilePicServlet</servlet-name>
+        <url-pattern>/UploadProfilePicServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
