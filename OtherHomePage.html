@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<jsp:include page="header.jsp"/>
+
+</head>
+
+
+<body>
+
+<div id="top">
+	<div id="name">Mickey Mouse</div>
+	<a id="friend-button" href="">Connect</a>
+	<div class="clear"></div>
+</div>
+
+<div id="bio">
+	<div id="bio-title">About Me!</div>
+	Fill personal bio here
+</div>
+
+
+<div id="info-reviews">
+	<div id="info">
+		<div id="info-title">Personal Info!</div>
+		Put personal info here
+	</div>
+	
+	<div id="reviews">
+		<div id="title-and-button">
+			<div id="review-title">Reviews!</div>
+			<a id="review-button" href="">Write Review</a>
+			<div class="clear"></div>
+		</div>
+		<div class="review">
+		<div class="cont">
+			<div class="reliability"> reliability score </div>
+			<div class="rating">RATING: Put score here/5</div>
+		</div>
+		<div class="review-inner">Put review here</div> 
+		<div class="rating-container">
+			<a class="agree-disagree-button" href="">Agree</a>
+			<a class="agree-disagree-button" href="">Disagree</a>
+		</div>
+		</div>
+		
+		<!-- for reviews in review list -->
+		<!-- <div class="review"> score: ${review.score} /5 -->
+		<!-- <div class="review-inner"> ${review.message} </div></div> -->
+	</div>
+</div>
+
+
+</body>
+
+</html>

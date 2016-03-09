@@ -15,6 +15,10 @@ body {
 	font-family: georgia, serif;
 }
 
+.clear {
+	float: clear;
+}
+
 nav {
 	border-bottom: 2px solid black;
 	border-left: 2px solid black;
@@ -53,9 +57,31 @@ nav a:hover {
 	float: clear;
 }	
 
+#top {
+	overflow: auto;
+}
+
 #name {
-	font-size: 300%;
+	font-size: 250%;
 	font-weight: bold;
+	float: left;
+}
+
+#friend-button {
+	float: right;
+	display: block;
+	background-color: #E5A5CB;
+	color: black;
+	padding: 6px;
+	border: 2px solid #280B4F;
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 8px;	
+}
+
+#top a:hover {
+	background-color: #7F055E;
+	color: white;
 }
 
 #bio {
@@ -136,11 +162,16 @@ nav a:hover {
 	float: right;
 	display: block;
 	text-decoration: none;
-	background-color: #7F055E;
+	background-color: #E5A5CB;
 	border: 2px solid black;
-	color: white;
+	color: black;
 	padding: 6px;
 	border-radius: 8px;
+}
+
+#reviews a:hover {
+	background-color: #7F055E;
+	color: white;
 }
 
 .review {
@@ -148,13 +179,42 @@ nav a:hover {
 	border-radius: 8px;
 	margin-bottom: 16px;
 	padding: 20px;
-	text-align: right;
 	color: black;
 	background-color: #FCF5FF;
 }
 
+.reliability {
+	float: left;
+}
+
+.cont {
+	overflow: auto;
+}
+
+.rating-container {
+	overflow: auto;
+	position: relative;
+}
+
+.agree-disagree-button {
+	float: left;
+	display: block;
+	text-decoration: none;
+	padding: 6px;
+	border: 2px solid black;
+	border-radius: 6px;
+	margin-right: 4px;
+	color: black;
+	background-color: #E5A5CB;
+}
+
+.rating {
+	float: right;
+}
+
 .review-inner {
 	border: 1px solid #280B4F;
+	margin-bottom: 4px;
 	padding: 10px;	
 	line-height: 150%;
 	text-align: left;
