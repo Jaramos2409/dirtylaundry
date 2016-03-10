@@ -73,12 +73,10 @@
                 <tr>
                     <td><input type="hidden" id="id" name="id" value="${user.id}"/> </td>
                 </tr>
-            </table>
-            <table>
                 <tr>
-                    <h2>About Me</h2>
-                    <input id="about" name="about" type ="text" value="${user.about}"  maxlength="1000" size="500"/>
-                <input type="submit" name="action" value="Save"><input type="submit" name="action" value="Back"
+                    <td><h2>About Me</h2></td>
+                    <td><input id="about" name="about" type ="text" value="${user.about}"  maxlength="1000" size="100"/></td>
+                    <td><input type="submit" name="action" value="Save"></td>
             </table>
         </div>
         </form>

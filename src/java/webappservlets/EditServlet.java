@@ -41,11 +41,10 @@ public class EditServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         
         
-        User mainuser = UserUtils.validateUser(request.getParameter("email"), request.getParameter("password"));
         String url;
         
         HttpSession session = request.getSession();
-        session.setAttribute("user", mainuser);
+        session.setAttribute("user", (User) request.getSession().getAttribute("user"));
         
         url = "/details.jsp";
         this.getServletContext().getRequestDispatcher(url).forward(request, response);

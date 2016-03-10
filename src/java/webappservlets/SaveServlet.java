@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import webappbeans.Reviewslist;
 import webappbeans.User;
 import webapputils.UserUtils;
 import webapputils.AuthUtils;
+import webapputils.ReviewUtils;
 
 /**
  *
@@ -57,13 +59,18 @@ public class SaveServlet extends HttpServlet {
         mainuser.setState(request.getParameter("state"));
         mainuser.setAbout(request.getParameter("about"));
         
+        HttpSession session = request.getSession();
+        User user = (User) request.getSession().getAttribute("user");
+        mainuser.setReviews(user.getReviews());
+        
         UserUtils.updateUser(mainuser);
         
         mainuser = UserUtils.validateUser(request.getParameter("email"), request.getParameter("password"));
         
         String url ="";
+        Reviewslist reviews = ReviewUtils.reviewsOfYou(mainuser.getId());
+        mainuser.setReviews(reviews);
         
-        HttpSession session = request.getSession();
         session.setAttribute("user", mainuser);
         
         url = "/details.jsp";

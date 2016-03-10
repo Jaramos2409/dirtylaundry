@@ -19,12 +19,14 @@
         <div id="name">
             ${visitee.firstname} ${visitee.lastname}
         </div>
+        <a id="friend-button" href="ConnectServlet?&action=connect&requestedid=${visitee.id}">Connect</a>
+        <div class="clear"></div>
 
         <div id="bio">
                 <div id="bio-title">About Me!</div>
                 ${visitee.about} 
         </div>
-        <div><a id="connect-button" href="ConnectServlet?&action=connect&requestedid=${visitee.id}">Connect</a></div>      
+        
         <div id="info-reviews">
                 <div id="info">
                         <div id="info-title">Personal Info!</div>

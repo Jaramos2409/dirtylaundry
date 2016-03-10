@@ -43,10 +43,6 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
 		Email: ${sessionScope.user.email} <br>
 		Phone: ${sessionScope.user.phone} <br>
 		Relationship: ${sessionScope.user.relationship} <br>
-                
-                <a href="EditServlet?&email=${sessionScope.user.email}&password=${sessionScope.user.password}">
-                    Edit Personal Information
-                </a>
 	</div>
         
         <div id="reviews">
