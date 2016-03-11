@@ -58,6 +58,7 @@ public class SaveServlet extends HttpServlet {
         mainuser.setGender(request.getParameter("gender"));
         mainuser.setState(request.getParameter("state"));
         mainuser.setAbout(request.getParameter("about"));
+        mainuser.setProfile(request.getParameter("profile"));
         
         HttpSession session = request.getSession();
         User user = (User) request.getSession().getAttribute("user");

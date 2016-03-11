@@ -81,6 +81,7 @@ nav a:hover {
 }
 
 #friend-button {
+        transform: translateY(-120%);
 	float: right;
 	display: block;
 	background-color: #E5A5CB;
@@ -90,6 +91,12 @@ nav a:hover {
 	text-decoration: none;
 	font-weight: bold;
 	border-radius: 8px;	
+}
+
+#friend-button:hover {
+    color: white;
+    background-color: #7F055E;
+    
 }
 
 #bio-title {
@@ -102,7 +109,7 @@ nav a:hover {
 
 #info-reviews {
 	position: relative;
-	height: 550px;
+	height: 750px;
 	background-color: #FFE6D3;
 	color: black;
 }
@@ -158,11 +165,16 @@ nav a:hover {
 	float: right;
 	display: block;
 	text-decoration: none;
-	background-color: #7F055E;
+	background-color: #E5A5CB;
 	border: 2px solid black;
-	color: white;
+	color: black;
 	padding: 6px;
 	border-radius: 8px;
+}
+
+#review-button:hover {
+    background-color: #7F055E;
+    color: white;
 }
 
 .review {

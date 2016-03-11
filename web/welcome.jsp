@@ -29,10 +29,10 @@ ${sessionScope.user.firstname} ${sessionScope.user.lastname}
 	${sessionScope.user.about} 
 </div>
 
-
 <div id="info-reviews">
 	<div id="info">
-		<div id="info-title">Personal Info!</div>
+            <div style="text-align: center;"><img src="${user.profile}" width="100" height="100"></div>
+            <div id="info-title">Personal Info!</div>
 		Lives in: ${sessionScope.user.city}, ${sessionScope.user.state}<br>
 		Hometown: ${sessionScope.user.city} <br>
 		Sex: ${sessionScope.user.gender} <br>

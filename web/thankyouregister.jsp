@@ -8,12 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="header2.jsp"/>
+        <link rel="stylesheet" type="text/css" href="style/style.css"> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="include/styles/bootstrap.css">
-        <link rel="stylesheet" href="include/styles/bootstrap-theme.css">
- 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <title>Success</title>
     </head>
     <body>

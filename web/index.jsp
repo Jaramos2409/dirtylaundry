@@ -28,8 +28,9 @@
             <input type="submit" value="Login"/>
             </div>
         </form>
-        
         <p>Not a member yet?</p>
         <a href="register.jsp">Register!</a>
+        <h1 style="text-align:center;">Dirty Laundry</h1>
+        <p><img src="http://3.bp.blogspot.com/--Elh1bWU44Y/U4M7FMEDWxI/AAAAAAAAI24/pCfzJwA8FiU/s1600/hamper.png" width="650" height="500"/></p>
     </body>
 </html>

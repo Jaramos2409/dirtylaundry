@@ -28,6 +28,9 @@ public class User implements Serializable {
     private String gender;
     private String about;
     private Reviewslist reviews;
+    private String profile;
+
+   
 
     public Reviewslist getReviews() {
         return reviews;
@@ -160,5 +163,12 @@ public class User implements Serializable {
         this.email = email;
     }
    
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
     
 }

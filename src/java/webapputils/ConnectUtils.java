@@ -265,6 +265,7 @@ public class ConnectUtils {
                         String st =rs.getString("state");
                         String g = rs.getString("gender");
                         String ab = rs.getString("about");
+                        String pr = rs.getString("profile");
                         
                         user.setId(id);
                         user.setFirstname(f);
@@ -281,6 +282,7 @@ public class ConnectUtils {
                         user.setGender(g);
                         user.setState(st);
                         user.setAbout(ab);
+                        user.setProfile(pr);
                         System.out.print(user.getFirstname());
                 }
        

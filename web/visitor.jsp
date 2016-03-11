@@ -11,6 +11,8 @@
     <head>
         <jsp:include page="header.jsp"/>
         <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" href="include/styles/bootstrap.css">
+        <link rel="stylesheet" href="include/styles/bootstrap-theme.css">
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${visitee.firstname}'s Page</title>
@@ -29,6 +31,7 @@
         
         <div id="info-reviews">
                 <div id="info">
+                    <div style="text-align: center;"><img src="${visitee.profile}" width="150" height="150"></div>
                         <div id="info-title">Personal Info!</div>
                         Lives in: ${visitee.city}, ${visitee.state}<br>
                         Hometown: ${visitee.city} <br>
@@ -61,10 +64,19 @@
                                  ${review.reviewer_name}</a>'s Review of <a href="VisitorServlet?&action=visitor&id=${visitee.id}">
                                  ${visitee.firstname} ${visitee.lastname}</a>:
                                 <div class="review-inner">${review.reviewtext}</div>
-                                ${review.agree_count} people agree with this review.<br>
-                                ${review.disagree_count} people disagree with this review.<br>
-                                What about you? <a href="AgreeServlet?&action=agree&reviewid=${review.id}&revieweeid=${review.reviewee_id}">Agree</a> 
-                                or <a href="DisagreeServlet?&action=disagree&reviewid=${review.id}&revieweeid=${review.reviewee_id}">Disagree</a><br>
+                                
+                                <div class="row"><form action="AgreeServlet?&action=agree&reviewid=${review.id}&revieweeid=${review.reviewee_id}" method="post">
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> Agree (${review.agree_count})
+               
+                        </button></form>
+                        <form action="DisagreeServlet?&action=disagree&reviewid=${review.id}&revieweeid=${review.reviewee_id}" method="post">
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-down"></span> Disagree(${review.disagree_count})
+                            
+                        </button></form>
+                        </div>
+
                             </div>
                         </c:forEach>
                     </c:if>

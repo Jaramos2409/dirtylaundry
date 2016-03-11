@@ -35,6 +35,10 @@
                     <td><input id="city" maxlength="30" name="city" size="30" type="text" value="${user.city}"/> </td>
                 </tr> 
                 <tr>
+                    <td><label for="state"><b>State<font color="red">*</font></b></label></td>
+                    <td><input id="state" maxlength="30" name="state" size="30" type="text" value="${user.state}"/> </td>
+                </tr>
+                <tr>
                     <td><label for="birthday"><b>Birthday<font color="red">*</font></b></label></td>
                     <td><input id="birthday" maxlength="30" name="birthday" size="30" type="text" value="${user.birthday}"/> </td>
                 </tr>
@@ -59,10 +63,6 @@
                     <td><input id="phone" maxlength="30" name="phone" size="30" type="text" value="${user.phone}"/> </td>
                 </tr>
                 <tr>
-                    <td><label for="state"><b>State<font color="red">*</font></b></label></td>
-                    <td><input id="state" maxlength="30" name="state" size="30" type="text" value="${user.state}"/> </td>
-                </tr>
-                <tr>
                     <td><label for="gender"><b>Gender<font color="red">*</font></b></label></td>
                     <td><input id="gender" maxlength="30" name="gender" size="30" type="text" value="${user.gender}"/> </td>
                 </tr>
@@ -74,9 +74,15 @@
                     <td><input type="hidden" id="id" name="id" value="${user.id}"/> </td>
                 </tr>
                 <tr>
+                    <td><label for="profile"><b>Profile Picture<font color="red">*</font></b></label></td>
+                    <td><input id="profile" maxlength="255" name="profile" size="100" type="text" value="${user.profile}"/> </td>
+                </tr>
+                <tr>
                     <td><h2>About Me</h2></td>
                     <td><input id="about" name="about" type ="text" value="${user.about}"  maxlength="1000" size="100"/></td>
                     <td><input type="submit" name="action" value="Save"></td>
+                </tr>
+                
             </table>
         </div>
         </form>

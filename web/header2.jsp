@@ -23,7 +23,7 @@
 
     <nav>
         <a class="right" href="">Report</a>
-        <a class="right" href="">FAQ</a>
+        <a class="right" href="FAQ.jsp">FAQ</a>
         <div class="clear"></div>
     </nav>
     
